@@ -13,7 +13,6 @@ import java.math.RoundingMode;
 public class Price implements Comparable<Price> {
     public static final String MESSAGE_CONSTRAINTS = "Price should be a positive number.";
     public static final String VALIDATION_REGEX = "\\d+(\\.\\d{1,2})?"; // Allow up to 2 decimal places
-    public static final BigDecimal MAX_PRICE = new BigDecimal("1000000000000");
     public final BigDecimal value;
 
     /**
@@ -35,7 +34,7 @@ public class Price implements Comparable<Price> {
             return false; // Not a valid number format
         }
         BigDecimal priceValue = new BigDecimal(test);
-        return priceValue.compareTo(BigDecimal.ZERO) > 0 && priceValue.compareTo(MAX_PRICE) <= 0;
+        return priceValue.compareTo(BigDecimal.ZERO) > 0;
     }
 
     @Override

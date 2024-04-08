@@ -16,7 +16,6 @@ public class Budget {
 
     public static final String MESSAGE_CONSTRAINTS = "Budget should be positive number.";
     public static final String VALIDATION_REGEX = "\\d+(\\.\\d{1,2})?"; // Allow up to 2 decimal places
-    public static final BigDecimal MAX_BUDGET = new BigDecimal("1000000000000");
     public final BigDecimal value;
 
     /**
@@ -38,7 +37,7 @@ public class Budget {
             return false; // Not a valid number format
         }
         BigDecimal budgetValue = new BigDecimal(test);
-        return budgetValue.compareTo(BigDecimal.ZERO) > 0 && budgetValue.compareTo(MAX_BUDGET) <= 0;
+        return budgetValue.compareTo(BigDecimal.ZERO) > 0;
     }
 
     /**
