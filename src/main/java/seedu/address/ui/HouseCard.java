@@ -50,7 +50,7 @@ public class HouseCard extends UiPart<Region> {
         this.house = house;
         houseType.setText("House Type: " + house.getHousingType().value);
         postalCode.setText("Postal Code: " + house.getPostalCode().value);
-        price.setText("Price: " + house.getPrice().value);
+        price.setText("Price: $" + house.getPrice().value);
 
         if (house instanceof Hdb) {
             Hdb hdb = (Hdb) house;

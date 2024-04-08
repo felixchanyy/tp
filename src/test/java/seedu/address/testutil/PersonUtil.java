@@ -68,7 +68,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
         sb.append(PREFIX_HOUSING_TYPE + buyer.getPreferredHousingType().value + " ");
-        sb.append(PREFIX_BUDGET + buyer.getBudget().value + " ");
+        sb.append(PREFIX_BUDGET + buyer.getBudget().toString() + " ");
         return sb.toString();
     }
 

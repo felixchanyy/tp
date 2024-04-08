@@ -61,7 +61,7 @@ public class JsonAdaptedHouse {
         this.postalCode = source.getPostalCode().value;
         this.street = source.getStreet().value;
         this.unitNumber = source.getUnitNumber().value;
-        this.price = source.getPrice().value;
+        this.price = source.getPrice().toString();
     }
 
     private void extractHouseDetails(House source) {

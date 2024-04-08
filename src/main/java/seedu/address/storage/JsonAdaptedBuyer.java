@@ -39,7 +39,7 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
      */
     public JsonAdaptedBuyer(Buyer source) {
         super(source);
-        budget = source.getBudget().value;
+        budget = source.getBudget().toString();
         preferredHousingType = source.getPreferredHousingType().value;
     }
 

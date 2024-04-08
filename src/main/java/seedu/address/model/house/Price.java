@@ -3,14 +3,18 @@ package seedu.address.model.house;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Represents a House's Price amount.
  * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
 public class Price implements Comparable<Price> {
     public static final String MESSAGE_CONSTRAINTS = "Price should be a positive number.";
-    public static final String VALIDATION_REGEX = "\\d+(\\.\\d+)?";
-    public final String value;
+    public static final String VALIDATION_REGEX = "\\d+(\\.\\d{1,2})?"; // Allow up to 2 decimal places
+    public static final BigDecimal MAX_PRICE = new BigDecimal("1000000000000");
+    public final BigDecimal value;
 
     /**
      * Constructs a {@code Price}.
@@ -20,19 +24,23 @@ public class Price implements Comparable<Price> {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
-        value = price;
+        this.value = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP); // Round to 2 decimal places
     }
 
     /**
      * Returns true if a given String is a valid price amount.
      */
     public static boolean isValidPrice(String test) {
-        return test.matches(VALIDATION_REGEX) && Double.parseDouble(test) >= 0;
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false; // Not a valid number format
+        }
+        BigDecimal priceValue = new BigDecimal(test);
+        return priceValue.compareTo(BigDecimal.ZERO) > 0 && priceValue.compareTo(MAX_PRICE) <= 0;
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
     }
 
     @Override
@@ -57,8 +65,6 @@ public class Price implements Comparable<Price> {
 
     @Override
     public int compareTo(Price other) {
-        double thisValue = Double.parseDouble(this.value);
-        double otherValue = Double.parseDouble(other.value);
-        return Double.compare(thisValue, otherValue);
+        return value.compareTo(other.value);
     }
 }
